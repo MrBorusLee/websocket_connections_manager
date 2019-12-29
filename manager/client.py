@@ -14,32 +14,33 @@ class WebsocketClientException(Exception):
 
 @dataclasses.dataclass
 class ClientDoesNotExistException(WebsocketClientException):
-    url: str
+    type_: str
 
     def __str__(self):
-        return f'Client for following url does not exist: {self.url}'
+        return f'Client for following url does not exist: {self.type_}'
 
 
-def get_client(url: str) -> typing.Type['BaseWebsocketClient']:
-    client = _CLIENTS.get(url)
+def get_client(type_: str) -> typing.Type['BaseWebsocketClient']:
+    client = _CLIENTS.get(type_)
     if client is None:
-        raise ClientDoesNotExistException(url)
+        raise ClientDoesNotExistException(type_)
     return client
 
 
 def _register_client(cls_: typing.Type['BaseWebsocketClient']) -> None:
-    _CLIENTS[cls_.HOST] = cls_
+    _CLIENTS[cls_.TYPE] = cls_
 
 
 @dataclasses.dataclass
 class BaseWebsocketClient(abc.ABC):
+    name: str
     url: URL
-    conn_attempts: int = 5
-    conn_timeout: int = 5
+    connection_attempts: int = 5
+    timeout: int = 5
     connection: websockets.WebSocketClientProtocol = dataclasses.field(default=None, init=False)
     status: typing.Optional[str] = dataclasses.field(default=None, init=False)
 
-    HOST = None
+    TYPE = None
 
     def as_dict(self):
         return {'url': self.url, 'status': self.status}
@@ -57,7 +58,7 @@ class BaseWebsocketClient(abc.ABC):
 
 @_register_client
 class SomeTestWebsocketClient(BaseWebsocketClient):
-    HOST = 'localhost'
+    TYPE = 'print_handler'
 
     async def _handle_message(self, message: str) -> None:
         print(message)

@@ -1,3 +1,4 @@
+pyyaml
 redis
 aioredis
 click

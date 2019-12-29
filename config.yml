@@ -1,0 +1,14 @@
+timeout: 5  # in seconds, for all connections
+connections:
+  PrintHandler1:
+    type: print_handler
+    url: ws://localhost:5678
+    timeout: 15  # override base settings for specified connection
+
+  PrintHandler2:
+    type: print_handler
+    url: ws://localhost:5678
+
+  PrintHandler3:
+    type: print_handler
+    url: ws://localhost:5678
