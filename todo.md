@@ -8,7 +8,7 @@
 - [ ] handlers for different connection types  (Nastya)
 - [ ] reconnect (trying infinite times with huge timeout, timeout can be configured in config)  (Boris)
 - [x] client declaration using name
-- [ ] sending data to redis storage example
+- [x] sending data to redis pubsub example
 - [x] command line client handler  
 - [ ] dockerfile/docker-compose
 - [x] parsing yaml config

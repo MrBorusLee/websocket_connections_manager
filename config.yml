@@ -9,6 +9,6 @@ connections:
     type: print_handler
     url: ws://localhost:5678
 
-  PrintHandler3:
-    type: print_handler
+  RedisPublisher1:
+    type: redis_publisher
     url: ws://localhost:5678

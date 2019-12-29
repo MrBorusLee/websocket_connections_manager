@@ -5,6 +5,8 @@ import dataclasses
 
 from yarl import URL
 
+from manager.redis_connection import get_connection
+
 _CLIENTS: typing.Dict[str, typing.Type['BaseWebsocketClient']] = {}
 
 
@@ -62,3 +64,12 @@ class SomeTestWebsocketClient(BaseWebsocketClient):
 
     async def _handle_message(self, message: str) -> None:
         print(message)
+
+
+@_register_client
+class RedisPublisherWebsocketClient(BaseWebsocketClient):
+    TYPE = 'redis_publisher'
+
+    async def _handle_message(self, message: str) -> None:
+        redis_connection = await get_connection()
+        redis_connection.publish(self.name, message)
