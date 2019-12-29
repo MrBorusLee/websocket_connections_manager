@@ -1,7 +1,7 @@
 # TODO:
 ## Command line tool
 - [x] show all connections and their statuses
-- [ ] send message through specified connection
+- [x] send message through specified connection
 - [ ] handle connection errors
 
 ## Connection manager application
