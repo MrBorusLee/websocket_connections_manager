@@ -17,6 +17,8 @@ async def time(websocket, path):
     CONNECTIONS.add(websocket)
     try:
         while True:
+            async for message in websocket:
+                print(message)
             await websocket.send(str(STATE))
             await asyncio.sleep(3)
     finally:

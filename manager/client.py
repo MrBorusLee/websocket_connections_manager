@@ -53,6 +53,9 @@ class BaseWebsocketClient(abc.ABC):
         async for message in self.connection:
             await self._handle_message(message)
 
+    async def send_message(self, message: str):
+        await self.connection.send(message)
+
     @abc.abstractmethod
     async def _handle_message(self, message: str) -> None:
         ...

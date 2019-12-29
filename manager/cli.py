@@ -22,4 +22,14 @@ def ls():
         print(websocket_connection)
 
 
+@click.option('--message')
+@click.option('--connection_name')
+@click.command()
+def send_message(message, connection_name):
+    redis_client = redis.Redis(host=redis_connection.REDIS_HOST, port=redis_connection.REDIS_PORT,
+                               db=redis_connection.REDIS_DB)
+    redis_client.publish('WS_MESSAGES', pickle.dumps({'message': message, 'connection_name': connection_name}))
+
+
 connection.add_command(ls)
+connection.add_command(send_message)

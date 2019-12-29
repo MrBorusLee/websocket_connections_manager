@@ -12,4 +12,4 @@
 - [x] command line client handler  
 - [ ] dockerfile/docker-compose
 - [x] parsing yaml config
-- [ ] setup Pipfile
+- [ ] setup Pipenv
