@@ -1,14 +1,5 @@
 timeout: 5  # in seconds, for all connections
 connections:
-  PrintHandler1:
-    type: print_handler
-    url: ws://localhost:5678
-    timeout: 15  # override base settings for specified connection
-
-  PrintHandler2:
-    type: print_handler
-    url: ws://localhost:5678
-
-  RedisPublisher1:
-    type: redis_publisher
-    url: ws://localhost:5678
+  BitmexInstrument:
+    type: bitmex_instrument
+    url: wss://www.bitmex.com/realtime?subscribe=instrument

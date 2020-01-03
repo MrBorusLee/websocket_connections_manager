@@ -1,7 +1,10 @@
+import json
+
 import websockets
 import abc
 import typing
 import dataclasses
+import pickle
 
 from yarl import URL
 
@@ -62,17 +65,14 @@ class BaseWebsocketClient(abc.ABC):
 
 
 @_register_client
-class SomeTestWebsocketClient(BaseWebsocketClient):
-    TYPE = 'print_handler'
-
-    async def _handle_message(self, message: str) -> None:
-        print(message)
-
-
-@_register_client
-class RedisPublisherWebsocketClient(BaseWebsocketClient):
-    TYPE = 'redis_publisher'
+class BitmexInstrumentWebsocketClient(BaseWebsocketClient):
+    TYPE = 'bitmex_instrument'
 
     async def _handle_message(self, message: str) -> None:
         redis_connection = await get_connection()
-        redis_connection.publish(self.name, message)
+        message = json.loads(message)
+
+        if 'table' in message:
+            data = message['data'][0]
+
+        redis_connection.publish(self.name, pickle.dumps(data))
