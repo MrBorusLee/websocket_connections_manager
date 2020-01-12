@@ -1,6 +1,0 @@
-pyyaml
-redis
-aioredis
-click
-yarl
-websockets

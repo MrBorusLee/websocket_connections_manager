@@ -38,5 +38,6 @@ class WsConnectionsManager:
 
     def gather_loops(self):
         return asyncio.gather(
-            *[client.loop() for client in self.connections.values()] + [self.update_connection_statuses(), self.send_messages_from_command_line()]
+            *[client.loop() for client in self.connections.values()] + [self.update_connection_statuses(),
+                                                                        self.send_messages_from_command_line()]
         )
