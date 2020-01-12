@@ -1,4 +1,4 @@
-timeout: 5  # in seconds, for all connections
+timeout: 600 # in seconds, for all connections
 connections:
   BitmexInstrument:
     type: bitmex_instrument
